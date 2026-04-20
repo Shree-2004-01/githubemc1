@@ -1,2 +1,147 @@
-one
-two
+Good — now this is finally something concrete.
+And I’m going to be very direct:
+👉 Your backend is currently too basic for this UI
+💣 What this UI actually demands (not what you THINK)
+This is NOT just:
+Text
+Copy code
+POST /orders
+GET /orders
+👉 That’s beginner level.
+This UI is showing a real tracking system
+🧠 Break the UI properly
+🔷 1. Top Section → Active Delivery
+Shows:
+Order ID
+Item
+Estimated delivery time
+Pincode
+Delivery progress (timeline)
+Driver info
+Zone
+💣 Your current backend problem
+Your table only supports:
+Text
+Copy code
+Basic order info ✔
+Simple status ✔
+But UI needs:
+Text
+Copy code
+Timeline (Placed → Confirmed → Dispatched → Out for Delivery → Delivered)
+Driver info
+Live status message
+👉 You don’t fully support this yet
+🎯 What YOU must build (based on UI)
+Stop guessing. Build exactly this.
+✅ 1. Get All Orders (already expected)
+Text
+Copy code
+GET /orders
+Used for: 👉 “All Orders” list (bottom table)
+✅ 2. Get Order Details (IMPORTANT)
+Text
+Copy code
+GET /orders/{id}
+Must return:
+orderId
+item
+price
+status
+deliveryDate
+driverId
+🔥 3. NEW API (YOU DIDN’T BUILD)
+👉 Active Delivery API
+Text
+Copy code
+GET /orders/active
+Return:
+Json
+Copy code
+{
+  "orderId": 42,
+  "item": "Sony WH-1000XM5",
+  "status": "OUT_FOR_DELIVERY",
+  "estimatedDelivery": "5:00 PM",
+  "pincode": "600003",
+  "driverName": "Ravi Kumar",
+  "zone": "Chennai South"
+}
+💣 Why this matters
+UI top section = only 1 active order
+👉 Not all orders
+👉 Not random
+🔥 4. Delivery Timeline (IMPORTANT)
+UI shows:
+Text
+Copy code
+Placed → Confirmed → Dispatched → Out for Delivery → Delivered
+You must map it using:
+Your enum:
+Text
+Copy code
+PENDING → Placed
+INPROGRESS → Dispatched / Out for Delivery
+DELIVERED → Delivered
+EXCEPTION → Failed
+⚠️ Reality check
+Your current enum is:
+Text
+Copy code
+PENDING, INPROGRESS, EXCEPTION, DELIVERED
+UI wants:
+Text
+Copy code
+5 stages ❗
+👉 So:
+either expand enum (better)
+or map internally (acceptable)
+🔥 5. Search API (optional but visible)
+UI has:
+Text
+Copy code
+Search orders...
+👉 So:
+Text
+Copy code
+GET /orders/search?keyword=iphone
+🔥 6. Driver Info (you don’t own it, but must show)
+UI shows:
+Text
+Copy code
+Driver: Ravi Kumar
+👉 So:
+store driverId
+later fetch from Driver service
+💣 Brutal truth
+If you only build:
+Text
+Copy code
+CRUD APIs ❌
+👉 Your backend will NOT match UI
+🎯 Final backend scope (YOUR REAL TASK)
+Must build:
+Text
+Copy code
+✔ POST /orders
+✔ GET /orders
+✔ GET /orders/{id}
+✔ GET /orders/active
+✔ PUT /orders/{id}/status
+Optional but strong:
+Text
+Copy code
+✔ GET /orders/search
+🚀 What you should do NOW
+Keep your Order APIs
+Add /orders/active
+Improve response (include more fields)
+Test everything
+💬 I’ll push you harder now
+Answer this:
+👉 In your system, how do you decide:
+Text
+Copy code
+Which order is “ACTIVE”?
+If you don’t answer that properly: 👉 your /active API will be wrong
+Don’t just code. Think like system.
