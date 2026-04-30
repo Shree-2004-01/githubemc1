@@ -1,1 +1,214 @@
-Shree
+Alright, I’m not going to dump textbook definitions on you—that’s useless for interviews. You need clear mental models + simple wording + real understanding. Let’s go step by step.
+🔹 What is Spring Boot?
+Spring Boot is a framework that makes building Java web applications fast and easy.
+👉 Instead of configuring everything manually (like in old Spring), it:
+sets things up automatically
+gives ready-made tools
+lets you run apps quickly
+Think:
+Spring Boot = “Spring without headache configuration”
+🔹 Features of Spring Boot
+Auto-configuration (no manual setup)
+Embedded servers (no need Tomcat install)
+Starter dependencies (ready packages)
+Production tools (monitoring, logs)
+Minimal code
+🔹 Advantages
+Let’s be blunt:
+Without Spring Boot → too much config, XML, time waste
+With Spring Boot → fast, clean, less boilerplate
+👉 Key benefits:
+Faster development
+Easy setup
+Production-ready
+Good for microservices
+🔹 What is Auto-Configuration?
+Spring Boot automatically configures your project based on dependencies.
+Example: If you add MySQL dependency → it auto-configures DB connection.
+👉 You don’t configure → it guesses smartly.
+🔹 What are Starters?
+Starters are predefined dependency bundles.
+Example:
+spring-boot-starter-web → for web apps
+spring-boot-starter-data-jpa → for database
+👉 Instead of adding 10 dependencies → add 1 starter.
+🔹 Spring Boot CLI
+CLI = Command Line Tool
+👉 You can write and run Spring Boot apps using commands without full setup.
+Reality check:
+👉 Almost nobody uses this in real projects. Don’t over-focus.
+🔹 Spring Boot Actuator
+Used to monitor and manage app in production
+Example:
+health status
+metrics
+logs
+👉 Helps DevOps team.
+🔹 Embedded Servers
+Spring Boot comes with built-in servers like:
+Tomcat (default)
+Jetty
+👉 You don’t deploy app to server
+👉 Server runs inside your app
+🔹 Default Port
+👉 8080
+🔹 @SpringBootApplication
+This is the main annotation
+It combines:
+@Configuration
+@EnableAutoConfiguration
+@ComponentScan
+👉 One annotation instead of 3.
+🔹 Spring Boot vs Spring MVC
+Be clear here:
+Spring MVC
+Spring Boot
+Manual config
+Auto config
+Need external server
+Embedded server
+Slow setup
+Fast setup
+👉 Spring Boot uses Spring MVC internally.
+🔹 Spring Initializr
+A tool to generate Spring Boot project quickly
+👉 You select dependencies → it gives ready project
+🔹 How to create Spring Boot app?
+Use Spring Initializr
+Import into IDE
+Add dependencies
+Run main class
+🔹 application.properties / application.yml
+Used to configure your app
+Example:
+DB connection
+port
+logging
+🔹 Change Port
+Properties
+Copy code
+server.port=9090
+🔹 Dependency Injection (DI)
+DI = Spring gives objects instead of you creating them
+Bad:
+Java
+Copy code
+Car car = new Car();
+Good: Spring creates and injects:
+Java
+Copy code
+@Autowired
+Car car;
+🔹 @Autowired
+Used to inject dependency automatically
+🔹 @Component vs @Service vs @Repository
+All create beans, but purpose differs:
+@Component → general
+@Service → business logic
+@Repository → database layer
+👉 Functionally same, but used for clarity
+🔹 @RestController
+Used to create REST APIs
+👉 Returns JSON directly
+🔹 @Controller vs @RestController
+@Controller → returns views (HTML)
+@RestController → returns data (JSON)
+🔹 Creating REST APIs
+Basic example:
+Java
+Copy code
+@RestController
+public class UserController {
+
+    @GetMapping("/user")
+    public String getUser() {
+        return "User data";
+    }
+}
+🔹 @RequestMapping
+Used to map URL
+Java
+Copy code
+@RequestMapping("/api")
+🔹 @GetMapping, @PostMapping, etc.
+Shortcuts:
+GET → fetch data
+POST → create
+PUT → update
+DELETE → remove
+🔹 Exception Handling
+Use:
+@ExceptionHandler
+@ControllerAdvice
+👉 To handle errors globally
+🔹 Spring Boot DevTools
+👉 Auto restart app on code change
+👉 Speeds development
+🔹 Database Connection
+Steps:
+Add dependency (JPA/MySQL)
+Configure in application.properties
+Create entity class
+🔹 Spring Data JPA
+👉 Simplifies database operations
+No need to write SQL:
+Java
+Copy code
+userRepository.findAll();
+🔹 Hibernate
+ORM tool → maps Java objects to DB tables
+👉 Spring Boot uses it internally via JPA
+🔹 Profiles
+Used for environments:
+dev
+test
+prod
+👉 Different configs for each
+🔹 Logging
+Spring Boot uses logging frameworks automatically
+Example:
+Java
+Copy code
+log.info("message");
+🔹 Microservices Architecture
+👉 Break big app into small services
+Spring Boot is widely used for this.
+🔹 @EnableAutoConfiguration
+👉 Enables auto configuration manually
+(Already included in @SpringBootApplication)
+🔹 Deployment
+Ways:
+Run JAR file
+Deploy to cloud (AWS, etc.)
+🔹 WAR vs JAR
+JAR → standalone (recommended)
+WAR → needs external server
+👉 In real world → JAR dominates
+🔹 Security
+Use Spring Security:
+authentication
+authorization
+🔹 Spring Boot Test
+Used for testing apps
+🔹 Unit Testing
+Use:
+JUnit
+Mockito
+Example:
+Java
+Copy code
+@Test
+public void testMethod() {
+    assertEquals(1, 1);
+}
+⚠️ Brutal Reality Check
+Right now, if you just read this, you’ll forget 70%.
+👉 If you want actual understanding:
+Build a CRUD project
+Add DB
+Create APIs
+Break things and fix
+Otherwise, this is just theory junk.
+If you want, I can:
+�Turn this into interview-ready answers (short + sharp)
+Or �make you build a real project step-by-step (best option)
